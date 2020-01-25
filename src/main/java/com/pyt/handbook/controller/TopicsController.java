@@ -34,13 +34,14 @@ public class TopicsController {
 	private TopicService topicService;
 
 	@PostMapping("save")
-	public String signup(@RequestBody TopicVO topic) {
+	public Topic signup(@RequestBody TopicVO topic) {
+		Topic response = null;
 		try {
-			return GSON.toJson(topicService.saveTopic(topic));
+			response = topicService.saveTopic(topic);
 		} catch (Exception e) {
 			logger.error("Error saving topic {}", topic.getTopicId(), e);
-			return "failed";
 		}
+		return response;
 	}
 	
 	@PostMapping("subTopic/save")
